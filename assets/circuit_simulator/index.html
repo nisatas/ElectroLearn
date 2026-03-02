@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Devre Simülasyonu</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; overflow: hidden; background: #BBE0EF; touch-action: none; }
+    #canvas { display: block; width: 100%; height: 100%; touch-action: none; }
+  </style>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+  <script>
+(function() {
+  'use strict';
+
+  var config = null;
+  var nodes = [];
+  var requiredIds = [];
+  var wires = [];
+  var selectedId = null;
+  var success = false;
+  var canvas, ctx, width, height;
+  var NODE_R = 14;
+  var WIRE_COLOR = '#F16D34';
+  var FILL_DONE = '#58CC02';
+
+  function getNode(id) {
+    for (var i = 0; i < nodes.length; i++) if (nodes[i].id === id) return nodes[i];
+    return null;
+  }
+
+  function isCircuitComplete() {
+    if (requiredIds.length === 0) return false;
+    var graph = {};
+    nodes.forEach(function(n) { graph[n.id] = []; });
+    wires.forEach(function(w) {
+      graph[w.a].push(w.b);
+      graph[w.b].push(w.a);
+    });
+    var visited = {};
+    var queue = [requiredIds[0]];
+    while (queue.length) {
+      var cur = queue.shift();
+      if (visited[cur]) continue;
+      visited[cur] = true;
+      (graph[cur] || []).forEach(function(next) { queue.push(next); });
+    }
+    return requiredIds.every(function(id) { return visited[id]; });
+  }
+
+  function px(n) { return n.x * width; }
+  function py(n) { return n.y * height; }
+
+  function drawArduino() {
+    var left = width * 0.02, top = height * 0.08, w = width * 0.22, h = height * 0.84;
+    ctx.fillStyle = '#1A1A1A';
+    roundRect(left, top, w, h, 12);
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(22, 30, 84, 0.3)';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+  }
+
+  function drawBreadboard() {
+    var left = width * 0.26, top = height * 0.12, w = width * 0.5, h = height * 0.76;
+    ctx.fillStyle = '#8B7355';
+    roundRect(left, top, w, h, 8);
+    ctx.fill();
+    ctx.strokeStyle = '#5D4E37';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+  }
+
+  function roundRect(x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.lineTo(x + w - r, y);
+    ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+    ctx.lineTo(x + w, y + h - r);
+    ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+    ctx.lineTo(x + r, y + h);
+    ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+    ctx.lineTo(x, y + r);
+    ctx.quadraticCurveTo(x, y, x + r, y);
+    ctx.closePath();
+  }
+
+  function drawResistor() {
+    var ra = getNode('r_a'), rb = getNode('r_b');
+    if (!ra || !rb) return;
+    var cx = (ra.x + rb.x) / 2 * width, cy = (ra.y + rb.y) / 2 * height;
+    ctx.strokeStyle = '#D4A574';
+    ctx.lineWidth = 4;
+    ctx.beginPath();
+    ctx.moveTo(px(ra), py(ra));
+    ctx.lineTo(cx - 8, cy);
+    ctx.lineTo(cx, cy - 8);
+    ctx.lineTo(cx + 8, cy);
+    ctx.lineTo(cx, cy + 8);
+    ctx.lineTo(cx - 8, cy);
+    ctx.lineTo(px(rb), py(rb));
+    ctx.stroke();
+  }
+
+  function drawLed() {
+    var lp = getNode('led_plus'), lm = getNode('led_minus');
+    if (!lp || !lm) return;
+    var cx = (lp.x + lm.x) / 2 * width, cy = (lp.y + lm.y) / 2 * height;
+    ctx.strokeStyle = '#666';
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.moveTo(px(lp), py(lp));
+    ctx.lineTo(px(lm), py(lm));
+    ctx.stroke();
+    ctx.fillStyle = success ? '#FFDD00' : '#444';
+    ctx.beginPath();
+    ctx.ellipse(cx, cy, 12, 16, 0, 0, Math.PI * 2);
+    ctx.fill();
+    if (success) {
+      ctx.strokeStyle = 'rgba(255, 221, 0, 0.5)';
+      ctx.lineWidth = 3;
+      ctx.stroke();
+    }
+  }
+
+  function drawWires() {
+    ctx.strokeStyle = WIRE_COLOR;
+    ctx.lineWidth = 5;
+    ctx.lineCap = 'round';
+    wires.forEach(function(w) {
+      var a = getNode(w.a), b = getNode(w.b);
+      if (a && b) {
+        ctx.beginPath();
+        ctx.moveTo(px(a), py(a));
+        ctx.lineTo(px(b), py(b));
+        ctx.stroke();
+      }
+    });
+  }
+
+  function drawNodes() {
+    nodes.forEach(function(n) {
+      var x = px(n), y = py(n);
+      var isSel = selectedId === n.id;
+      ctx.fillStyle = isSel ? WIRE_COLOR : '#fff';
+      ctx.beginPath();
+      ctx.arc(x, y, NODE_R, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.strokeStyle = '#161E54';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      ctx.fillStyle = '#161E54';
+      ctx.font = '600 10px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(n.label, x, y + NODE_R + 2);
+    });
+  }
+
+  function render() {
+    if (!ctx || !config) return;
+    ctx.clearRect(0, 0, width, height);
+    drawArduino();
+    drawBreadboard();
+    drawResistor();
+    drawLed();
+    drawWires();
+    drawNodes();
+  }
+
+  function hitNode(x, y) {
+    var i, n, dx, dy;
+    for (i = nodes.length - 1; i >= 0; i--) {
+      n = nodes[i];
+      dx = x - n.x * width;
+      dy = y - n.y * height;
+      if (dx * dx + dy * dy <= NODE_R * NODE_R) return n.id;
+    }
+    return null;
+  }
+
+  function onTap(ev) {
+    if (success) return;
+    var x = (ev.clientX !== undefined ? ev.clientX : ev.touches[0].clientX) - canvas.getBoundingClientRect().left;
+    var y = (ev.clientY !== undefined ? ev.clientY : ev.touches[0].clientY) - canvas.getBoundingClientRect().top;
+    var scaleX = canvas.width / canvas.getBoundingClientRect().width;
+    var scaleY = canvas.height / canvas.getBoundingClientRect().height;
+    x *= scaleX;
+    y *= scaleY;
+    var id = hitNode(x, y);
+    if (!id) { selectedId = null; render(); return; }
+    if (selectedId === null) {
+      selectedId = id;
+    } else if (selectedId === id) {
+      selectedId = null;
+    } else {
+      var a = selectedId, b = id;
+      if (a > b) { var t = a; a = b; b = t; }
+      if (!wires.some(function(w) { return w.a === a && w.b === b; })) {
+        wires.push({ a: a, b: b });
+      }
+      selectedId = null;
+    }
+    if (isCircuitComplete()) {
+      success = true;
+      if (typeof CircuitBridge !== 'undefined') {
+        try { CircuitBridge.postMessage(JSON.stringify({ type: 'complete' })); } catch (e) {}
+      }
+    }
+    render();
+  }
+
+  function resize() {
+    width = canvas.width = canvas.offsetWidth;
+    height = canvas.height = canvas.offsetHeight;
+    render();
+  }
+
+  window.startCircuit = function() {
+    if (!window.__circuitConfig) return;
+    config = window.__circuitConfig;
+    nodes = config.nodes || [];
+    requiredIds = config.requiredNodeIds || [];
+    wires = [];
+    selectedId = null;
+    success = false;
+    resize();
+  };
+
+  window.clearWires = function() {
+    if (success) return;
+    wires = [];
+    selectedId = null;
+    render();
+  };
+
+  canvas = document.getElementById('canvas');
+  ctx = canvas.getContext('2d');
+  width = canvas.offsetWidth;
+  height = canvas.offsetHeight;
+  canvas.addEventListener('mousedown', onTap);
+  canvas.addEventListener('touchstart', function(e) { e.preventDefault(); onTap(e); }, { passive: false });
+  window.addEventListener('resize', resize);
+  if (window.__circuitConfig) window.startCircuit();
+})();
+  </script>
+</body>
+</html>

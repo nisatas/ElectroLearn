@@ -1,0 +1,121 @@
+{
+  "id": "unit1",
+  "title": "Temeller",
+  "units": [
+    {
+      "id": "u1",
+      "title": "Unit 1 - Temeller",
+      "skills": [
+        {
+          "id": "skill-led",
+          "title": "LED Nedir? (Işığı Yakıyoruz!)",
+          "order": 1,
+          "miniTasks": ["Işığı Yak! (5V, direnç, LED, GND)", "Breadboard'da LED bağla", "Doğru polarite ile yak"],
+          "lessonCards": [
+            {"id": "led-1", "title": "LED nedir? (Minik ışık lambası)", "body": "LED, minik bir ışık lambası gibidir. Elektrik verdiğinde yanar, çok az enerji harcar ve uzun süre dayanır. Telefon ekranlarında, trafik ışıklarında, oyuncaklarda ve daha bir sürü yerde LED var. Arduino ile sen de LED yakıp söndürebilirsin!", "imageUrl": null, "audioUrl": null},
+            {"id": "led-2", "title": "LED'in uzun ve kısa bacağı ne işe yarar?", "body": "LED'in iki bacağı vardır: biri uzun, biri kısa. Uzun bacak artıya (+), kısa bacak eksive (-) bağlanır. Doğru bağlarsan LED yanar; ters bağlarsan yanmaz. Takmadan önce bacaklara bak, uzun olanı artı tarafına tak!", "imageUrl": null, "audioUrl": null},
+            {"id": "led-3", "title": "Breadboard nedir?", "body": "Breadboard, devre kurmak için kullandığımız delikli bir plakadır. Kabloları ve LED'i deliklere takarak bağlantı yaparız; lehim gerekmez. Ortadaki oluk iki yarıyı ayırır; üst ve alt sıralar genelde artı ve eksi hatları için kullanılır.", "imageUrl": null, "audioUrl": null},
+            {"id": "led-4", "title": "Arduino'ya LED nasıl bağlanır?", "body": "Arduino'nun 5V pininden bir jumper kablo al, dirençten geçir, LED'in uzun bacağına (artı) bağla. LED'in kısa bacağını (eksi) GND pinine bağla. Direnç LED'i korur; dirençsiz bağlama, LED yanar! Mini uygulama: 1 Arduino, 1 breadboard, 1 LED, 1 direnç (220 ohm), 2 jumper kablo ile 'Işığı Yak!' görevini yap.", "imageUrl": null, "audioUrl": null}
+          ],
+          "questions": [
+            {"id": "q1", "text": "LED'in uzun bacağı nereye bağlanır?", "type": "multipleChoice", "options": ["Artıya (+)", "Eksiye (-)", "GND'ye", "Hiçbirine"], "correctIndex": 0, "explanation": "Uzun bacak artıya (+), kısa bacak eksive (-) bağlanır."},
+            {"id": "q2", "text": "Breadboard ne işe yarar?", "type": "multipleChoice", "options": ["Devre kurmak için", "Pil şarj etmek için", "Ses çıkarmak için", "Ekran göstermek için"], "correctIndex": 0, "explanation": "Breadboard devre kurmak için delikli plakadır."},
+            {"id": "q3", "text": "LED'i Arduino'ya bağlarken direnç kullanmalı mıyız?", "type": "multipleChoice", "options": ["Evet, LED yanmasın diye", "Hayır, gerek yok", "Sadece bazen", "Direnç nedir?"], "correctIndex": 0, "explanation": "Direnç akımı sınırlar, LED'i korur."},
+            {"id": "q4", "text": "LED'in iki bacağı vardır: uzun ve kısa.", "type": "trueFalse", "options": ["Doğru", "Yanlış"], "correctIndex": 0, "explanation": "Evet, uzun bacak artı, kısa bacak eksi içindir."},
+            {"id": "q5", "text": "LED'i ters bağlarsak yine de yanar.", "type": "trueFalse", "options": ["Doğru", "Yanlış"], "correctIndex": 1, "explanation": "Ters bağlarsak LED yanmaz."}
+          ]
+        },
+        {
+          "id": "skill-akim-gerilim",
+          "title": "Elektrik Suyu Gibi Akıyor! (Akım & Gerilim)",
+          "order": 2,
+          "miniTasks": ["5V pininden LED'e elektrik ver", "GND'yi öğren ve bağla"],
+          "lessonCards": [
+            {"id": "ag-1", "title": "Akım = Akan elektrik (su gibi düşün)", "body": "Elektrik, tıpkı borudan akan su gibi telden akar. Buna akım denir. Ne kadar çok elektron akarsa akım o kadar büyüktür. Birimi Amper (A). Su ne kadar hızlı akıyorsa, elektrik de o kadar 'çok' akıyor gibi düşünebilirsin.", "imageUrl": null, "audioUrl": null},
+            {"id": "ag-2", "title": "Gerilim = İtme gücü (suyu iten basınç gibi)", "body": "Gerilim (voltaj), elektriği iten güçtür. Tıpkı musluktaki suyun basıncı gibi: basınç yüksekse su güçlü akar. Birimi Volt (V). Arduino'nun 5V pini, 5 voltluk bir 'basınç' verir; bu yüzden devrede elektrik akar.", "imageUrl": null, "audioUrl": null},
+            {"id": "ag-3", "title": "Arduino 5V ne demek? GND nedir?", "body": "Arduino'daki 5V pini, 5 volt elektrik verir; LED ve diğer elemanları bu pinle besleriz. GND (toprak) ise eksi uçtur; elektrik buradan 'döner'. Mini deney: 5V pininden bir kablo al, direnç ve LED'den geçir, diğer ucu GND'ye bağla – LED yanar!", "imageUrl": null, "audioUrl": null}
+          ],
+          "questions": [
+            {"id": "ag-q1", "text": "Akım neye benzetilir?", "type": "multipleChoice", "options": ["Akan su", "Duran su", "Buz", "Bulut"], "correctIndex": 0, "explanation": "Akım, borudan akan su gibi düşünülür."},
+            {"id": "ag-q2", "text": "Gerilim (voltaj) neyi ifade eder?", "type": "multipleChoice", "options": ["İtme gücü", "Renk", "Sıcaklık", "Ağırlık"], "correctIndex": 0, "explanation": "Gerilim elektriği iten güçtür, su basıncı gibi."},
+            {"id": "ag-q3", "text": "Arduino'da 5V pini ne işe yarar?", "type": "multipleChoice", "options": ["5 volt elektrik verir", "Ses çıkarır", "Işık yakar", "Pili şarj eder"], "correctIndex": 0, "explanation": "5V pini 5 volt elektrik verir, devreyi besler."},
+            {"id": "ag-q4", "text": "GND, Arduino'da eksi (toprak) uçtur.", "type": "trueFalse", "options": ["Doğru", "Yanlış"], "correctIndex": 0, "explanation": "GND eksi uçtur, elektrik buradan döner."}
+          ]
+        },
+        {
+          "id": "skill-direnc",
+          "title": "Direnç – LED'i Koruyan Süper Kahraman",
+          "order": 3,
+          "miniTasks": ["Dirençli LED devresi kur", "Dirençsiz (simülasyon) farkı öğren"],
+          "lessonCards": [
+            {"id": "dr-1", "title": "Direnç ne yapar?", "body": "Direnç, elektriğin çok hızlı akmasını engelleyen süper kahraman gibidir. LED'e fazla elektrik giderse LED yanar. Direnç, akımı azaltarak LED'i korur. Birimi Ohm (Ω).", "imageUrl": null, "audioUrl": null},
+            {"id": "dr-2", "title": "LED neden dirençsiz yanmaz?", "body": "LED'in iç direnci çok düşüktür. Arduino'dan doğrudan 5V verirsen çok fazla akım geçer ve LED anında yanar. Direnç olmazsa LED ışık vermeden bozulur. Bu yüzden her zaman LED ile seri direnç kullan!", "imageUrl": null, "audioUrl": null},
+            {"id": "dr-3", "title": "220 ohm direnç nedir? Deney", "body": "220 ohm, LED için sık kullanılan uygun bir direnç değeridir. 5V'ta LED'i güvenle yakar. Deney: Önce dirençli LED bağla – yanar ve uzun süre dayanır. Dirençsiz LED (sadece simülasyonda anlatılır; gerçek devrede deneme, LED'i yakabilir!).", "imageUrl": null, "audioUrl": null}
+          ],
+          "questions": [
+            {"id": "dr-q1", "text": "Direnç LED'i neden korur?", "type": "multipleChoice", "options": ["Akımı azaltır", "Işığı artırır", "Pili şarj eder", "Sesi açar"], "correctIndex": 0, "explanation": "Direnç akımı sınırlayarak LED'i yanmaktan korur."},
+            {"id": "dr-q2", "text": "LED'e doğrudan 5V verirsek ne olur?", "type": "multipleChoice", "options": ["LED yanar (bozulur)", "Daha parlak yanar", "Hiçbir şey olmaz", "Pil biter"], "correctIndex": 0, "explanation": "Fazla akım LED'i bozar, bu yüzden direnç şart."},
+            {"id": "dr-q3", "text": "220 ohm direnç LED için uygun bir değerdir.", "type": "trueFalse", "options": ["Doğru", "Yanlış"], "correctIndex": 0, "explanation": "5V'ta 220 Ω LED'i güvenle çalıştırır."},
+            {"id": "dr-q4", "text": "Direnç olmadan LED'i Arduino'ya bağlamak güvenlidir.", "type": "trueFalse", "options": ["Doğru", "Yanlış"], "correctIndex": 1, "explanation": "Dirençsiz bağlamak LED'i yakabilir, güvenli değil."}
+          ]
+        },
+        {
+          "id": "skill-ohm",
+          "title": "Ohm Kanunu – Süper Güç Formülü",
+          "order": 4,
+          "miniTasks": ["5V + farklı dirençlerle LED dene"],
+          "lessonCards": [
+            {"id": "ohm-1", "title": "Volt = Güç. Fazla volt = Daha çok akım", "body": "Volt (gerilim) ne kadar yüksekse, elektrik o kadar güçlü iter. Direnç aynı kalırsa, volt artınca akım da artar. Yani fazla volt = daha çok akım. Arduino 5V veriyor; bu yüzden uygun dirençle LED güzel yanar.", "imageUrl": null, "audioUrl": null},
+            {"id": "ohm-2", "title": "Basit örnek: 5V ve küçük direnç", "body": "5V varsa ve direnç küçükse, LED'den çok akım geçer – LED çok parlak yanar hatta yanabilir! Direnç büyükse akım azalır, LED daha sönük ama güvende yanar. Ohm Kanunu: V = I × R. Arduino üzerinden düşün: 5V sabit, R'yi artırırsan I azalır.", "imageUrl": null, "audioUrl": null}
+          ],
+          "questions": [
+            {"id": "ohm-q1", "text": "Volt (gerilim) artarsa, direnç aynıysa akım ne olur?", "type": "multipleChoice", "options": ["Artar", "Azalır", "Değişmez", "Sıfır olur"], "correctIndex": 0, "explanation": "Volt artarsa akım da artar (direnç aynı kalırsa)."},
+            {"id": "ohm-q2", "text": "5V ve küçük dirençte LED çok parlak yanar.", "type": "trueFalse", "options": ["Doğru", "Yanlış"], "correctIndex": 0, "explanation": "Küçük direnç = çok akım = çok parlak, hatta LED yanabilir."}
+          ]
+        },
+        {
+          "id": "skill-seri-paralel",
+          "title": "Seri ve Paralel Devre – Işık Takımı",
+          "order": 5,
+          "miniTasks": ["2 LED'i breadboard'da bağla", "Seri ve paralel hangisi daha parlak dene"],
+          "lessonCards": [
+            {"id": "sp-1", "title": "Seri bağlarsak ne olur?", "body": "İki LED'i seri bağlarsan: önce birinin artısına, sonra eksisi ikincinin artısına, ikincinin eksisi GND'ye. Elektrik sırayla ikisinden de geçer. Aynı akım ikisine de gider; genelde ikisi de aynı parlaklıkta yanar.", "imageUrl": null, "audioUrl": null},
+            {"id": "sp-2", "title": "Paralel bağlarsak ne olur? Mini görev", "body": "İki LED'i paralel bağlarsan: her ikisinin artısı 5V'a (direnç üzerinden), eksileri GND'ye. İki ayrı yol olur, her LED kendi yolunda yanar. Mini görev: 2 LED'i breadboard'da bağla – biri seri, biri paralel. Hangisi daha parlak? Paralelde her LED 5V görür (direnç paylaşılmazsa), seride voltaj bölünür.", "imageUrl": null, "audioUrl": null}
+          ],
+          "questions": [
+            {"id": "sp-q1", "text": "Seri bağlı iki LED'den elektrik nasıl geçer?", "type": "multipleChoice", "options": ["Sırayla ikisinden de", "Sadece birinden", "Hiçbirinden", "Rastgele"], "correctIndex": 0, "explanation": "Seride akım sırayla her iki LED'den de geçer."},
+            {"id": "sp-q2", "text": "Paralel bağlı LED'lerde her kolda aynı gerilim vardır.", "type": "trueFalse", "options": ["Doğru", "Yanlış"], "correctIndex": 0, "explanation": "Paralelde her kol aynı 5V ve GND'ye bağlıdır."}
+          ]
+        },
+        {
+          "id": "skill-multimetre",
+          "title": "Multimetre – Elektrik Dedektifi",
+          "order": 6,
+          "miniTasks": ["5V pininde voltaj ölç", "Pil voltajı ölç"],
+          "lessonCards": [
+            {"id": "mm-1", "title": "Multimetre nedir?", "body": "Multimetre, elektrik dedektifi gibidir: voltaj (volt), akım ve direnç ölçer. Kırmızı ve siyah probları doğru deliğe takarız, ekranda değeri okuruz. Voltaj ölçmek için V veya DCV kademesini seçeriz.", "imageUrl": null, "audioUrl": null},
+            {"id": "mm-2", "title": "Volt ölçümü nasıl yapılır? Mini görev", "body": "Volt ölçerken multimetre devreye paralel bağlanır: kırmızı prob ölçülecek noktaya (örn. 5V), siyah prob GND'ye. Mini görev: Arduino'nun 5V pininde 5V ölç; bir pilin uçlarında da voltajı ölç (örn. 1,5 V).", "imageUrl": null, "audioUrl": null}
+          ],
+          "questions": [
+            {"id": "mm-q1", "text": "Voltaj ölçerken multimetre devreye nasıl bağlanır?", "type": "multipleChoice", "options": ["Paralel", "Seri", "Bağlanmaz", "Karışık"], "correctIndex": 0, "explanation": "Voltaj ölçümünde problar ölçülecek noktaya paralel tutulur."},
+            {"id": "mm-q2", "text": "5V pininde yaklaşık 5 volt ölçeriz.", "type": "trueFalse", "options": ["Doğru", "Yanlış"], "correctIndex": 0, "explanation": "Arduino 5V pini yaklaşık 5 volt verir."}
+          ]
+        },
+        {
+          "id": "skill-trafik-lambasi",
+          "title": "Trafik Lambası Yapıyoruz",
+          "order": 7,
+          "miniTasks": ["Kırmızı, sarı, yeşil LED bağla", "Sırayla yakıp söndür (kod veya manuel)"],
+          "lessonCards": [
+            {"id": "tl-1", "title": "Proje: Trafik lambası", "body": "Bölüm sonu projesi: Trafik lambası! 3 LED kullanacağız: kırmızı, sarı, yeşil. Hepsi ayrı dirençlerle Arduino 5V ve GND'ye bağlanır. Her LED'in artı bacağı bir dirençten geçip 5V'a, eksi bacağı GND'ye gider. Pin numaralarını not et: kırmızı 2, sarı 3, yeşil 4 gibi.", "imageUrl": null, "audioUrl": null},
+            {"id": "tl-2", "title": "Nasıl çalıştırırız?", "body": "Arduino'ya kod yazarak sırayla LED'leri yakıp söndürebilirsin: önce kırmızı 3 saniye, sonra sarı 1 saniye, sonra yeşil 3 saniye, tekrar başa dön. İstersen önce breadboard'da sadece kablolarla tek tek test et; sonra kodla otomatik yap. Tebrikler, Unit 1 projesini tamamladın!", "imageUrl": null, "audioUrl": null}
+          ],
+          "questions": [
+            {"id": "tl-q1", "text": "Trafik lambasında kaç LED kullanırız?", "type": "multipleChoice", "options": ["3 (kırmızı, sarı, yeşil)", "1", "2", "5"], "correctIndex": 0, "explanation": "Kırmızı, sarı ve yeşil olmak üzere 3 LED kullanılır."},
+            {"id": "tl-q2", "text": "Her LED için ayrı direnç kullanmalıyız.", "type": "trueFalse", "options": ["Doğru", "Yanlış"], "correctIndex": 0, "explanation": "Her LED'i korumak için ayrı direnç kullanılır."}
+          ]
+        }
+      ]
+    }
+  ]
+}
