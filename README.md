@@ -1,82 +1,58 @@
-# ElectroLearn
+# ⚡ ElectroLearn
 
-ElectroLearn, elektrik ve elektronii (Arduino, breadboard odakl1) ad1m ad1m �reten **Duolingo tarz1** bir mobil uygulamad1r. Hedef kitle: ortaokul, lise ve ba_lang1� �niversite.
+ElectroLearn, elektrik ve elektroniği (Arduino & breadboard odaklı) adım adım öğreten **Duolingo tarzı** bir mobil uygulamadır.  
+
+🎯 Hedef kitle: Ortaokul, lise ve başlangıç seviyesindeki üniversite öğrencileri.
 
 ![Flutter](https://img.shields.io/badge/Flutter-Dart-02569B?logo=flutter)  
 ![Supabase](https://img.shields.io/badge/Backend-Supabase-3ECF8E?logo=supabase)
 
 ---
 
-## �zellikler
+## 🚀 Özellikler
 
-- **Konular, Testler, Projeler**  Ana ekranda ayr1 b�l�mler; her konunun alt ba_l1klar1 listelenir.
-- **Ders kartlar1**  Sesli okuma (TTS), mini g�rev listesi.
-- **Quiz**  �oktan se�meli / doru-yanl1_, a�1klamal1 sorular, XP kazan1m1.
-- **Devre sim�lasyonu**  Test sonras1 Devreyi kur: WebViewda JavaScript + HTML5 Canvas ile kablo balama, LEDi yakma.
-- **Rozetler**  Beceri tamamland1k�a profil sayfas1nda rozetler (LED Master, Trafik Lambas1 Projesi vb.).
-- **Profil**  XP, seri (streak), tamamlanan konular, rozetler, giri_/kay1t (Supabase).
+- **Konular, Testler, Projeler**  
+  Ana ekranda ayrı bölümler; her konunun alt başlıkları listelenir.
 
----
+- **Ders Kartları**  
+  Sesli okuma (TTS) desteği ve mini görev listeleri.
 
-## Teknoloji y11n1
+- **Quiz Sistemi**  
+  Çoktan seçmeli, doğru-yanlış ve açıklamalı sorular.  
+  Başarıya göre XP kazanımı.
 
-| Ama�               | Dil / Teknoloji   |
-| ------------------ | ----------------- |
-| Uygulama aray�z�   | Flutter (Dart)    |
-| Devre sim�lasyonu  | JavaScript        |
-| Devre �izimi       | HTML5 Canvas      |
-| Kod edit�r� (planlanan) | Monaco Editor (JS) |
-| Backend / Auth     | Supabase          |
+- **Devre Simülasyonu**  
+  Test sonrası "Devreyi Kur" bölümü:  
+  WebView içinde JavaScript + HTML5 Canvas ile kablo bağlama ve LED yakma simülasyonu.
 
-Detay: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+- **Rozet Sistemi**  
+  Beceri tamamlandıkça profil sayfasında rozetler kazanılır (LED Master, Trafik Lambası Projesi vb.).
 
----
-
-## Kurulum ve �al1_t1rma
-
-1. **Projeyi klonlay1n** (veya indirin).
-2. **Ba1ml1l1klar1 y�kleyin:**
-   ```bash
-   flutter pub get
-   ```
-3. **�al1_t1r1n:**
-   ```bash
-   flutter run
-   ```
-   Em�lat�r veya bal1 cihaz otomatik se�ilir; farkl1 cihaz i�in: `flutter run -d <device_id>`.
-
-### Supabase (opsiyonel)
-
-Giri_/kay1t kullanmak i�in `lib/app/supabase_config.dart` dosyas1nda `supabaseUrl` ve `supabaseAnonKey` deerlerini kendi Supabase projenizden doldurun. Deerler `YOUR_` ile ba_l1yorsa uygulama kimlik dorulama olmadan (misafir) �al1_1r.
+- **Profil Sayfası**  
+  XP, streak (seri), tamamlanan konular ve rozetler.  
+  Supabase ile giriş / kayıt sistemi.
 
 ---
 
-## Dok�mantasyon
+## 🛠 Teknoloji Yığını
 
-- **[Wiki](docs/WIKI.md)**  �zellikler, kullan1c1 ak1_1, proje yap1s1, i�erik format1, yap1land1rma ve geni_letme rehberi.
-- **[Mimari](docs/ARCHITECTURE.md)**  Teknoloji se�imleri, FlutterJS entegrasyonu, dosya yap1s1.
+| Amaç | Teknoloji |
+|------|-----------|
+| Mobil Arayüz | Flutter (Dart) |
+| Devre Simülasyonu | JavaScript |
+| Devre Çizimi | HTML5 Canvas |
+| Kod Editörü (planlanan) | Monaco Editor (JS) |
+| Backend / Auth | Supabase |
 
----
-
-## Proje yap1s1 (k1sa)
-
-```
-lib/
-  app/          # Tema, renkler, router, providerlar, rozet/devre config
-  domain/       # Modeller (course, lesson, question, badge, progress, circuit)
-  data/         # 0�erik (unit1.json), ilerleme (Hive)
-  features/     # Auth, home, lesson, quiz, result, profile, circuit
-  shared/       # Ortak widgetlar ve servisler (TTS)
-assets/
-  content/      # unit1.json
-  circuit_simulator/   # index.html (devre sim�lasyonu)
-docs/
-  WIKI.md       # Detayl1 wiki
-  ARCHITECTURE.md
-```
+📄 Detaylı mimari için:  
+👉 [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
 
 ---
 
-## Lisans
+## ⚙️ Kurulum ve Çalıştırma
 
-Bu proje eitim ama�l1d1r. Kullan1m ko_ullar1 proje sahibine aittir.
+### 1️⃣ Projeyi Klonlayın
+
+```bash
+git clone https://github.com/nisatas/electrolearn.git
+cd electrolearn
